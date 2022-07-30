@@ -1,0 +1,57 @@
+\section{Implementation}
+
+\begin{frame}{Implementation}
+    Some text here.
+\end{frame}
+
+\begin{frame}{Mixed Precision}
+    Mixed precision training uses lower bit floating point types for model params, gradients 
+    and optimizer states
+
+    \begin{small}
+        \begin{center}
+            \begin{tabular}{|c|c|}
+                \hline
+                \textbf{Advantages \color{green}\ding{51}} & \textbf{Disadvantages \color{red}\ding{55}} \\
+                \hline
+                Less memory required & Overflows / Underflows \\
+                Less memory bandwith used & Loss-scaling necessary \\
+                Faster CUDA operations & \\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{small} 
+
+    \input{figures/mixed_precision/half_precision.tex}
+\end{frame}
+
+\begin{frame}{Zero Redundancy Optimizer (ZeRO)}
+    \input{figures/deepspeed/zero.tex}
+\end{frame}
+
+\begin{frame}{Offloading Optimizations}
+    Deepspeed Offload-Engine determines optimizer states and gradients which can be 
+    computed on CPU using RAM or NVMe. \\~\\ 
+
+    \begin{columns}
+        \column{0.5\textwidth}
+        \centering
+        \vfill
+        \begin{small}
+            The engine optimizes tensor
+            allocation w.r.t:
+            \begin{itemize}
+                \item - CPU-GPU computation overhead
+                \item - communication costs
+                \item - memory savings
+            \end{itemize}
+        \end{small}
+        \vfill
+        \column{0.5\textwidth}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Deepspeed Configuration}
+    \centering
+    \includegraphics[scale=.18]{figures/ds_config.png}
+\end{frame}
