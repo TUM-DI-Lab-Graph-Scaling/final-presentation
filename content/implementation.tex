@@ -4,23 +4,23 @@
     Integration of DeepSpeed optimizations into the Open Catalyst Project. \\~\\ 
 
     \begin{columns}
-        \column{0.5\textwidth}
+        \begin{column}{0.5\textwidth}
+            \begin{center}
+                \includegraphics[scale=0.22]{figures/ocp-branch.png}
+    
+                Our code is available on GitHub\footnote{\url{https://github.com/TUM-DI-Lab-Graph-Scaling/ocp}}
+            \end{center}  
+        \end{column} 
 
-        \begin{center}
-            \includegraphics[scale=0.22]{figures/ocp-branch.png}
+        \begin{column}{0.5\textwidth}
+            \textbf{Integrated Features:}
 
-            Our code is available on GitHub\footnote{\url{https://github.com/TUM-DI-Lab-Graph-Scaling/ocp}}
-        \end{center} 
-        
-        \column{0.5\textwidth}
-
-        \textbf{Integrated Features:}
-
-        \begin{itemize}
-            \item \textcolor{green}{\ding{51}} Mixed-Precision Training
-            \item \textcolor{green}{\ding{51}} Zero Redundancy Optimizer (ZeRO)
-            \item \textcolor{green}{\ding{51}} Offloading Optimizations
-        \end{itemize}
+            \begin{itemize}
+                \item \textcolor{green}{\ding{51}} Mixed-Precision Training
+                \item \textcolor{green}{\ding{51}} Zero Redundancy Optimizer (ZeRO)
+                \item \textcolor{green}{\ding{51}} Offloading Optimizations
+            \end{itemize}
+        \end{column} 
     \end{columns}
 \end{frame}
 
@@ -54,20 +54,23 @@
     computed on CPU using RAM or NVMe. \\~\\ 
 
     \begin{columns}
-        \column{0.5\textwidth}
-        \centering
-        \vfill
-        \begin{small}
-            The engine optimizes tensor
-            allocation w.r.t:
-            \begin{itemize}
-                \bitem CPU-GPU computation overhead
-                \bitem Communication costs
-                \bitem Memory savings
-            \end{itemize}
-        \end{small}
-        \vfill
-        \column{0.5\textwidth}
+        \begin{column}{0.5\textwidth}
+            \begin{center}
+                \begin{small}
+                    The engine optimizes tensor
+                    allocation w.r.t:
+                    \begin{itemize}
+                        \bitem CPU-GPU computation overhead
+                        \bitem Communication costs
+                        \bitem Memory savings
+                    \end{itemize}
+                \end{small}
+            \end{center}
+        
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            
+        \end{column}
     \end{columns}
 \end{frame}
 
