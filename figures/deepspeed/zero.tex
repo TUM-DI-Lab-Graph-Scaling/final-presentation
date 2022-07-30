@@ -53,7 +53,7 @@
 
     \begin{subfigure}[t]{0.5\textwidth}
         \centering
-        \begin{tikzpicture}
+        \begin{tikzpicture}[scale=0.7, transform shape]
 
             \node[gpu, label={\scriptsize GPU $0$}] (0) at (0,0) {};
             \node[gpu, label={\scriptsize GPU $1$}] (1) at (2,0) {};
@@ -82,7 +82,7 @@
     ~
     \begin{subfigure}[t]{0.45\textwidth}
         \centering
-        \begin{tikzpicture}
+        \begin{tikzpicture}[scale=0.7, transform shape]
 
             \node[gpu, label={\scriptsize GPU $0$}] (0) at (0,0) {};
             \node[gpu, label={\scriptsize GPU $1$}] (1) at (2,0) {};
@@ -116,7 +116,7 @@
 
     \begin{subfigure}[t]{0.5\textwidth}
         \centering
-        \begin{tikzpicture}
+        \begin{tikzpicture}[scale=0.7, transform shape]
 
             \node[gpu, label={\scriptsize GPU $0$}] (0) at (0,0) {};
             \node[gpu, label={\scriptsize GPU $1$}] (1) at (2,0) {};
@@ -148,7 +148,7 @@
     ~
     \begin{subfigure}[t]{0.45\textwidth}
         \centering
-        \begin{tikzpicture}
+        \begin{tikzpicture}[scale=0.7, transform shape]
 
             \node[gpu, label={\scriptsize GPU $0$}] (0) at (0,0) {};
             \node[gpu, label={\scriptsize GPU $1$}] (1) at (2,0) {};
@@ -180,7 +180,7 @@
     \vspace*{-0.5em}
 
     \captionsetup{width=\dimexpr\textwidth-1.5cm\relax}
-    \caption{GPU memory utilization with different stages of ZeRO activated.
+    \caption*{\scriptsize GPU memory utilization with different stages of ZeRO activated.
     The data $\mathcal{D}$ is distributed evenly among the $m$ GPUs into 
     $\mathcal{D}_0, \dots, \mathcal{D}_{m-1}$.}
 \end{figure}
