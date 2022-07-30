@@ -266,8 +266,8 @@ TSWLatexianTemp*
 
 out/
 
-# VS Code
+# Mac
 .DS_Store
 
 # Local pdf
-final-report.pdf
+final-presentation.pdf
