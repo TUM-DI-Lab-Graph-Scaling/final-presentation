@@ -1,7 +1,27 @@
 \section{Implementation}
 
 \begin{frame}{Implementation}
-    Some text here.
+    Integration of DeepSpeed optimizations into the Open Catalyst Project. \\~\\ 
+
+    \begin{columns}
+        \column{0.5\textwidth}
+
+        \begin{center}
+            \includegraphics[scale=0.22]{figures/ocp-branch.png}
+
+            Our code is available on GitHub\footnote{\url{https://github.com/TUM-DI-Lab-Graph-Scaling/ocp}}
+        \end{center} 
+        
+        \column{0.5\textwidth}
+
+        \textbf{Integrated Features:}
+
+        \begin{itemize}
+            \item \textcolor{green}{\ding{51}} Mixed-Precision Training
+            \item \textcolor{green}{\ding{51}} Zero Redundancy Optimizer (ZeRO)
+            \item \textcolor{green}{\ding{51}} Offloading Optimizations
+        \end{itemize}
+    \end{columns}
 \end{frame}
 
 \begin{frame}{Mixed Precision}
@@ -14,7 +34,7 @@
                 \hline
                 \textbf{Advantages \color{green}\ding{51}} & \textbf{Disadvantages \color{red}\ding{55}} \\
                 \hline
-                Less memory required & Overflows / Underflows \\
+                Less memory required & Over/Underflows \\
                 Less memory bandwith used & Loss-scaling necessary \\
                 Faster CUDA operations & \\
                 \hline
@@ -41,9 +61,9 @@
             The engine optimizes tensor
             allocation w.r.t:
             \begin{itemize}
-                \item - CPU-GPU computation overhead
-                \item - communication costs
-                \item - memory savings
+                \bitem CPU-GPU computation overhead
+                \bitem Communication costs
+                \bitem Memory savings
             \end{itemize}
         \end{small}
         \vfill
