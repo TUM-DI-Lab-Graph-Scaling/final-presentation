@@ -4,24 +4,24 @@
     Integration of DeepSpeed optimizations into the Open Catalyst Project. \\~\\ 
 
     \begin{columns}
+        \centering
         \begin{column}{0.5\textwidth}
-            \begin{center}
-                \includegraphics[scale=0.22]{figures/ocp-branch.png}
-    
-                Our code is available on GitHub\footnote{\url{https://github.com/TUM-DI-Lab-Graph-Scaling/ocp}}
-            \end{center}  
+            \centering
+            \includegraphics[width=0.9\textwidth]{figures/ocp-branch.png}
+            Our code is available on GitHub\footnotemark
         \end{column} 
 
         \begin{column}{0.5\textwidth}
             \textbf{Integrated Features:}
 
             \begin{itemize}
-                \item \textcolor{green}{\ding{51}} Mixed-Precision Training
-                \item \textcolor{green}{\ding{51}} Zero Redundancy Optimizer (ZeRO)
-                \item \textcolor{green}{\ding{51}} Offloading Optimizations
+                \item \textcolor{tum-green}{\ding{51}} Mixed-Precision Training
+                \item \textcolor{tum-green}{\ding{51}} Zero Redundancy Optimizer (ZeRO)
+                \item \textcolor{tum-green}{\ding{51}} Offloading Optimizations
             \end{itemize}
         \end{column} 
     \end{columns}
+    \footnotetext{\url{https://github.com/TUM-DI-Lab-Graph-Scaling/ocp}}
 \end{frame}
 
 \begin{frame}{Mixed Precision}
@@ -32,7 +32,7 @@
         \begin{center}
             \begin{tabular}{|c|c|}
                 \hline
-                \textbf{Advantages \color{green}\ding{51}} & \textbf{Disadvantages \color{red}\ding{55}} \\
+                \textbf{Advantages \color{tum-green}\ding{51}} & \textbf{Disadvantages \color{red}\ding{55}} \\
                 \hline
                 Less memory required & Over/Underflows \\
                 Less memory bandwith used & Loss-scaling necessary \\

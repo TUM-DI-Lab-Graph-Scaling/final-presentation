@@ -97,13 +97,6 @@
 
 \renewcommand{\footnotesize}{\tiny}
 
-\let\svthefootnote\thefootnote
-\newcommand\freefootnote[1]{%
-  \let\thefootnote\relax%
-  \footnotetext{#1}%
-  \let\thefootnote\svthefootnote%
-}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Official TUM colors
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
