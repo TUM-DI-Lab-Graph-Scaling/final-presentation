@@ -1,12 +1,7 @@
-\begin{wrapfigure}{r}{0.3\textwidth}
+\begin{figure}[H]
     \centering
     \tikzset{
-        nodes={
-            draw=black, 
-            fill=tum-lighter-blue, 
-            circle,
-            inner sep=3
-        }
+        nodes={draw=black, fill=tum-lighter-blue, circle}
     }
     \tikzset{
         dots/.style args={#1per #2}{
@@ -15,27 +10,29 @@
         }
     }
 
-    \begin{subfigure}[t]{0.2\textwidth}
+    \begin{subfigure}[t]{0.3\textwidth}
         \centering
         % Figure of a sequence as a graph
         \begin{tikzpicture}
             \node (1) at (1,1) {};
             \node (2) at (2,1) {};
             \node (3) at (3,1) {};
+            \node[draw=white, fill=white] at (1,-0.3) {};
 
-            \draw[->] (1) -- (2);
-            \draw[->] (2) -- (3);
+            \draw[->, thick] (1) -- (2);
+            \draw[->, thick] (2) -- (3);
 
-            \draw[dots = 20 per 1cm,->] (0.5,1) -- (1);
-            \draw[dots = 20 per 1cm,->] (3) -- (3.5,1);
+            \draw[dots = 20 per 1cm,->, thick] (0.5,1) -- (1);
+            \draw[dots = 20 per 1cm,->, thick] (3) -- (3.5,1);
         \end{tikzpicture}
-        \caption*{\scriptsize Sequence}
+        \vspace*{1.5em}
+        \captionsetup{justification=centering}
+        \caption*{\normalsize Sequence \\
+        \textbf{RNNs}}
 
-    \end{subfigure}
-
-    \vspace*{0.5em}
-
-    \begin{subfigure}[t]{0.2\textwidth}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{0.3\textwidth}
         \centering
         % Figure of an image as a graph
         \begin{tikzpicture}
@@ -49,71 +46,76 @@
             \node (3-2) at (3,2) {};
             \node (3-3) at (3,3) {};
 
-            \draw[<->] (1-1) -- (1-2);
-            \draw[<->] (1-2) -- (1-3);
-            \draw[<->] (2-1) -- (2-2);
-            \draw[<->] (2-2) -- (2-3);
-            \draw[<->] (3-1) -- (3-2);
-            \draw[<->] (3-2) -- (3-3);
-            \draw[<->] (1-1) -- (2-1);
-            \draw[<->] (2-1) -- (3-1);
-            \draw[<->] (1-2) -- (2-2);
-            \draw[<->] (2-2) -- (3-2);
-            \draw[<->] (1-3) -- (2-3);
-            \draw[<->] (2-3) -- (3-3);
+            \draw[<->, thick] (1-1) -- (1-2);
+            \draw[<->, thick] (1-2) -- (1-3);
+            \draw[<->, thick] (2-1) -- (2-2);
+            \draw[<->, thick] (2-2) -- (2-3);
+            \draw[<->, thick] (3-1) -- (3-2);
+            \draw[<->, thick] (3-2) -- (3-3);
+            \draw[<->, thick] (1-1) -- (2-1);
+            \draw[<->, thick] (2-1) -- (3-1);
+            \draw[<->, thick] (1-2) -- (2-2);
+            \draw[<->, thick] (2-2) -- (3-2);
+            \draw[<->, thick] (1-3) -- (2-3);
+            \draw[<->, thick] (2-3) -- (3-3);
 
-            \draw[dots = 20 per 1cm,<->] (1-1) -- (0.5,1);
-            \draw[dots = 20 per 1cm,<->] (1-1) -- (1,0.5);
-            \draw[dots = 20 per 1cm,<->] (2-1) -- (2,0.5);
-            \draw[dots = 20 per 1cm,<->] (3-1) -- (3,0.5);
-            \draw[dots = 20 per 1cm,<->] (3-1) -- (3.5,1);
-            \draw[dots = 20 per 1cm,<->] (3-2) -- (3.5,2);
-            \draw[dots = 20 per 1cm,<->] (3-3) -- (3.5,3);
-            \draw[dots = 20 per 1cm,<->] (3-3) -- (3,3.5);
-            \draw[dots = 20 per 1cm,<->] (2-3) -- (2,3.5);
-            \draw[dots = 20 per 1cm,<->] (1-3) -- (1,3.5);
-            \draw[dots = 20 per 1cm,<->] (1-3) -- (0.5,3);
-            \draw[dots = 20 per 1cm,<->] (1-2) -- (0.5,2);
+            \draw[dots = 20 per 1cm,<->, thick] (1-1) -- (0.5,1);
+            \draw[dots = 20 per 1cm,<->, thick] (1-1) -- (1,0.5);
+            \draw[dots = 20 per 1cm,<->, thick] (2-1) -- (2,0.5);
+            \draw[dots = 20 per 1cm,<->, thick] (3-1) -- (3,0.5);
+            \draw[dots = 20 per 1cm,<->, thick] (3-1) -- (3.5,1);
+            \draw[dots = 20 per 1cm,<->, thick] (3-2) -- (3.5,2);
+            \draw[dots = 20 per 1cm,<->, thick] (3-3) -- (3.5,3);
+            \draw[dots = 20 per 1cm,<->, thick] (3-3) -- (3,3.5);
+            \draw[dots = 20 per 1cm,<->, thick] (2-3) -- (2,3.5);
+            \draw[dots = 20 per 1cm,<->, thick] (1-3) -- (1,3.5);
+            \draw[dots = 20 per 1cm,<->, thick] (1-3) -- (0.5,3);
+            \draw[dots = 20 per 1cm,<->, thick] (1-2) -- (0.5,2);
         \end{tikzpicture}
-        \caption*{\scriptsize Image}
+        \vspace*{1.5em}
+        \captionsetup{justification=centering}
+        \caption*{\normalsize Image \\
+        \textbf{CNNs}}
+
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{0.3\textwidth}
+        \centering
+        % Figure of a general graph
+        \begin{tikzpicture}
+            \node (A) at (0,0) {};
+            \node (B) at (0.2, 1) {};
+            \node (C) at (1.2, -0.6) {};
+            \node (D) at (-0.7, 1.2) {};
+            \node (E) at (-0.5, -0.5) {};
+            \node (F) at (-1.2, 0.1) {};
+            \node (G) at (1.6, 1.6) {};
+            \node (H) at (-0.3, 0.5) {};
+
+            \draw[<->, thick] (A) -- (B);
+            \draw[<->, thick] (B) -- (H);
+            \draw[<->, thick] (H) -- (A);
+            \draw[->, thick] (A) -- (C);
+            \draw[->, thick] (E) -- (A);
+            \draw[->, thick] (E) -- (H);
+            \draw[->, thick] (G) -- (B);
+            \draw[->, thick] (G) -- (C);
+            \draw[->, thick] (G) -- (C);
+            \draw[->, thick] (F) -- (H);
+            \draw[->, thick] (F) -- (A);
+            \draw[<->, thick] (F) -- (E);
+            \draw[->, thick] (D) -- (F);
+            \draw[->, thick] (B) -- (C);
+            \draw[dots = 20 per 1cm,->, thick] (D) -- (-1,1.6);
+            \draw[dots = 20 per 1cm,->, thick] (D) -- (-0.3,1.7);
+            \draw[dots = 20 per 1cm,->, thick] (C) -- (1.8,-0.5);
+            \draw[dots = 20 per 1cm,<->, thick] (F) -- (-1.8,-0.3);
+        \end{tikzpicture}
+        \vspace*{1.5em}
+        \captionsetup{justification=centering}
+        \caption*{
+            \normalsize Some arbitrary graph \\ \textbf{GNNs}}
 
     \end{subfigure}
-
-    % \begin{subfigure}[t]{0.25\textwidth}
-    %     \centering
-    %     % Figure of a general graph
-    %     \begin{tikzpicture}
-    %         \node (A) at (0,0) {};
-    %         \node (B) at (0.2, 1) {};
-    %         \node (C) at (1.2, -0.6) {};
-    %         \node (D) at (-0.7, 1.2) {};
-    %         \node (E) at (-0.5, -0.5) {};
-    %         \node (F) at (-1.2, 0.1) {};
-    %         \node (G) at (1.6, 1.6) {};
-    %         \node (H) at (-0.3, 0.5) {};
-
-    %         \draw[<->] (A) -- (B);
-    %         \draw[<->] (B) -- (H);
-    %         \draw[<->] (H) -- (A);
-    %         \draw[->] (A) -- (C);
-    %         \draw[->] (E) -- (A);
-    %         \draw[->] (E) -- (H);
-    %         \draw[->] (G) -- (B);
-    %         \draw[->] (G) -- (C);
-    %         \draw[->] (G) -- (C);
-    %         \draw[->] (F) -- (H);
-    %         \draw[->] (F) -- (A);
-    %         \draw[<->] (F) -- (E);
-    %         \draw[->] (D) -- (F);
-    %         \draw[->] (B) -- (C);
-    %         \draw[dots = 20 per 1cm,->] (D) -- (-1,1.6);
-    %         \draw[dots = 20 per 1cm,->] (D) -- (-0.3,1.7);
-    %         \draw[dots = 20 per 1cm,->] (C) -- (1.8,-0.5);
-    %         \draw[dots = 20 per 1cm,<->] (F) -- (-1.8,-0.3);
-    %     \end{tikzpicture}
-    %     \caption*{\scriptsize Arbitrary graph}
-    %
-    %\end{subfigure}
-    \caption{Structured data as graphs.}
     
-\end{wrapfigure}
+\end{figure}
