@@ -1,0 +1,67 @@
+\subsection{Microsoft DeepSpeed}
+
+Microsoft DeepSpeed\footnote{\url{https://github.com/microsoft/DeepSpeed}} is
+a deep learning training optimization library built on top of PyTorch enabling
+large-scale distributed neural network training and making training on multiple devices 
+(or machines) more memory- and time-efficient. Particularly for large-scale training of
+transformer models like Megatron-LM \cite{10.48550/ARXIV.1909.08053}, DeepSpeed has
+already been used extensively and proven very 
+useful\footnote{\url{https://github.com/microsoft/Megatron-DeepSpeed}}.
+As we will dive deeper into DeepSpeed's optimizations and their integration 
+into the OCP codebase in the following chapter~\ref{section:implementation}, this 
+section is merely intended as a high-level overview of the optimizations that 
+DeepSpeed offers.
+
+At the heart of DeepSpeed lies the \textit{Zero Redundancy Optimizer} 
+\cite{https://doi.org/10.48550/arxiv.1910.02054,DBLP:journals/corr/abs-2101-06840,DBLP:journals/corr/abs-2104-07857},
+or short \textit{ZeRO}, which is a sophisticated and broad parallelization strategy 
+combining data, model and pipeline parallelism paradigms.
+As it was already implied in the previous section~\ref{subsubsec:data-model-pipeline},
+both model and data parallelism separately have their own flaws: While data parallelism
+is memory inefficient as there is a lot of redundancy in storing a copy of the whole 
+model in each data-parallel process, model parallelism can impose significant communication
+overheads. 
+
+At this point, let us just briefly remind ourselves of the types of memory consumption 
+that occur when training neural networks: The main components that consume memory are the 
+model itself (including parameters, gradients and optimizer states), 
+the current data batch, as well as residual state memory, namely activations that are 
+computed during the forward pass or temporary buffers.
+
+ZeRO, as introduced initially in \cite{https://doi.org/10.48550/arxiv.1910.02054},
+optimizes both model memory consumption and residual memory consumption in the
+following ways:
+
+\begin{itemize}
+    \item \textit{ZeRO-DP} (\enquote{data parallelism}) is based on standard
+          data parallelism and is designed for large models with significant
+          memory footprints. ZeRO-DP can be seen as a combination of data and model
+          parallelism in which (parts of) the model states are partitioned
+          among the data-parallel processes, while a dynamic communication
+          schedule ensures relatively low communication overhead. Various stages
+          determining the scope of the model state partitioning can be progressively
+          activated, like stage 1 (partitioning of optimizer states among the processes), 
+          stage 2 (partitioning of optimizer states and gradients) as well as 
+          the final stage 3 (partitioning of optimizer states, gradients, and 
+          parameters) which corresponds to full model parallelism.
+    \item \textit{ZeRO-R} (\enquote{residual memory}) tackles residual memory consumption: 
+          Generally, activation memory consumption can be decreased by 
+          \textit{activation checkpointing}, which means that certain activations
+          are released from memory after computation in the forward pass and
+          recomputed when needed in the backward pass---at the cost of this additional
+          computation time. Inter alia, ZeRO-R now also partitions such activation 
+          checkpoints across the data-parallel processes and gathers them again when 
+          needed; apart from that, activations might also be moved to CPU memory. 
+\end{itemize}
+
+\textit{ZeRO-Offload} \cite{DBLP:journals/corr/abs-2101-06840} and 
+\textit{ZeRO-Infinity} \cite{DBLP:journals/corr/abs-2104-07857} are feature extensions of ZeRO
+that were added at a later point in time to enable offloading of model states to CPU memory 
+for very large models in order to further increase GPU memory savings. While ZeRO-Offload 
+enables offloading of optimizer states in stage 2 of ZeRO-DP, ZeRO-Infinity
+enables both offloading of model parameters and optimizer states in stage 3. 
+
+The specific demands of parallelization strategy in modern-day large-scale model training 
+have furthermore given rise to custom extensions to DeepSpeed such as EleutherAI's DeeperSpeed
+\footnote{\url{https://github.com/EleutherAI/DeeperSpeed}} and the addition of custom 
+highly-optimized kernels.

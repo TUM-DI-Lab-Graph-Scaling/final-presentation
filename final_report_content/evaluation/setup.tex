@@ -1,0 +1,34 @@
+\subsection{Evaluation Setup}
+
+We evaluated all models on a single machine with 2 AMD Epyc 7542 (32 CPU-Cores each), 528 GB memory, 
+and 8 Nvidia RTX A6000 with 48 GB GDDR6-memory. The GPUs were not connected by NVLink, so we used 
+P2P communication through PCI for NCCL communication collectives. Practically speaking, this 
+means that we set \texttt{NCCL\_P2P\_LEVEL} to \texttt{PIX}.
+
+\begin{enumerate}[align=left]
+    \item[\textbf{GemNet}] The first model we evaluated with our DeepSpeed enhancements was 
+    the force-centric GemNet-dT scaled up to roughly 292 million parameters corresponding to 
+    Gemnet-XL \cite*{https://doi.org/10.48550/arxiv.2203.09697}. 
+    The model consists of 6 interactions blocks, an atom embedding size of 128, an edge 
+    embedding size of 1536, and triplet embedding size of 384. All other hyperparameters are equal 
+    to Gemnet-dT as it was configured for the OCP benchmark evaluation.
+
+    \item[\textbf{DimeNet++}] Furthermore we evaluated the energy-centric DimeNet++ with the configuration 
+    defined in \cite*{https://doi.org/10.48550/arxiv.2203.09697}. The model has 4 interaction blocks, a hidden 
+    dimension of 2048, an output block of 1536, and triplet dimension of 256, amounting to approximately 
+    216 million parameters. Again, all other hyperparameters are equal to DimeNet++ as it was configured 
+    for the OCP benchmark evaluation.
+\end{enumerate}
+
+For detailed analysis we gathered metrices from all our experiment runs regarding epoch runtimes, 
+CPU memory usage, GPU memory usage, as well as GPU memory reserved or allocated by PyTorch directly.
+We collected the data with a custom profling framework for PyTorch which we present in more detail 
+in Appendix~\ref{appendix:profiling}.
+In addition, we used the integrated PyTorch profiler\footnote{\url{https://pytorch.org/docs/stable/profiler.html}}
+to collect step-by-step performance metrics, including information about communcation collectives and 
+volume or breakdown of calls to CUDA operations. PyTorch profiler also includes plugins to 
+load and visualize the profiling data in Tensorboard, which allowed us to do ad-hoc profiling 
+even when the experiment was still running.
+
+
+

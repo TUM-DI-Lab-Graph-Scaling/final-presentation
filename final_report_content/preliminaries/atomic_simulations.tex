@@ -1,0 +1,66 @@
+\subsection{GNNs for Atomic Simulations}
+\label{subsec:atomic-simulations}
+
+\subsubsection{General}
+\label{subsubsec:atomic-simulations-general}
+
+Suppose one has information about the chemical and spatial structure of a molecule 
+and would like to predict properties of this very molecule, e.g. its energy (at the 
+current point in time or after some evolution) or the forces acting on the 
+individual atoms. Some of these properties might be directly
+computable using quantum mechanical methods---like Density Functional Theory (DFT) 
+\cite{doi:10.1021/ed5004788}. However, quantum mechanics based methods often come
+with significant drawbacks as they are extremely expensive from a computational 
+standpoint, imposing the necessity to either optimize these conventional methods 
+as far as possible or use completely different approaches.
+
+One alternative approach is to compute or 
+predict such molecule properties using supervised
+machine learning in order to learn a function that maps molecule structures to their
+respective properties. For this task, Graph
+Neural Networks (GNNs) are very well suited not only because a molecule can naturally
+be expressed as a graph (e.g. using its structural formula and
+interatomic distances), but also because in this case, the 
+assumption of invariance w.r.t. permutations of the atoms or the assumption that 
+the update rules do not differ between nodes or edges and that one is hence
+learning somewhat universal functions, seem very reasonable.
+
+From now on, we define a molecule consisting of $n$ atoms by its atomic numbers 
+$\zz$ and its positions $\XX$, where
+\begin{equation}
+    \XX \: \coloneqq \: \set{\xx_1, \dots, \xx_n}, \; \xx_i \in \R^3
+    \qquad \text{and} \qquad 
+    \zz \: \coloneqq \: \set{z_1, \dots, z_n}, \; z_i \in \N \text{.}
+    \label{eq:molecule_setup}
+\end{equation}
+Suppose $E(\XX, \zz)$ is the energy of the whole molecule structure, then one can immediately
+obtain the forces acting on the individual atoms indexed by $i \in \set{1, \dots, n}$ as
+\[
+    \FF_i \: \coloneqq \: \frac{\partial E(\XX, \zz)}{\partial \xx_i} \: \in \: \R^3 \text{.}
+\]
+If we now want to simultaneously predict the energy $E$ and forces $\FF_i$
+of a molecule structure, there are two options: In \textit{energy-centric models}, 
+a global graph feature which models molecule energy
+is regarded as the GNN output and the forces are obtained by differentiating w.r.t.
+the atom locations. In contrast, \textit{force-centric models} predict both energy and forces
+directly as a global attribute and node embeddings respectively.
+
+In many cases there is still some arbitrariness in the choice of the 
+exact positions $\XX$: Energies of molecule structures might be invariant w.r.t. 
+translations and rotations, or forces might be invariant w.r.t. 
+translations and equivariant w.r.t. rotations. Rather than letting the model figure out
+these fundamental invariants of its predicting functions on its own (e.g. by 
+data augmentation), they are often directly incorporated into the model to reduce 
+complexity. One approach to achieve this is to compute pairwise distances $d_{ij}$ 
+between the atoms and use them instead of the individual atomic locations $\XX$. 
+However, this might
+not always be sufficient to completely characterize the spatial structure of a molecule:
+Since the interatomic distances are only kept for a part of the pairs of 
+nodes, there exist pairs of different molecules which cannot be
+distinguished with this approach \cite[Appendix A]{DBLP:journals/corr/abs-2003-03123}.
+In the following subchapters, we will introduce two GNN architectures that were initially
+proposed by Gasteiger et al. and overcome this problem.
+
+\input{./content/preliminaries/atomic_simulations/dimenet.tex}
+\input{./content/preliminaries/atomic_simulations/gemnet.tex}
+

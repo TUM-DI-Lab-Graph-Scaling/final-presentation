@@ -1,0 +1,73 @@
+\subsection{Offloading Optimizations}
+\label{subsection:offloading}
+
+To further reduce GPU memory usage, DeepSpeed contains optimizations to offload 
+data and compute from the GPU to CPU or even Non-Volatile Memory express (NVMe) 
+memory. 
+
+Offloading optimizations in DeepSpeed were introduced in ZeRO-Offload 
+\cite*{DBLP:journals/corr/abs-2101-06840}. ZeRO-Offload builds on top of 
+the ZeRO Stage 2 optimizer which partitions gradients and optimizer states. 
+With offloading enabled, each GPU offloads part of its partition to the CPU. 
+The offload engine automatically determines gradients and optimizer states 
+which can be computed on the CPU while minimizing communications between CPU 
+and GPU and maximize memory savings on the GPU.
+
+To determine the offload strategy, the offload engine represents the model as 
+data-flow graph with nodes are model states (parameters, gradients and 
+optimiter states) and edges are communication volume between that flows through 
+the model during training. ZeRO-Offload uses a two-way partitioning scheme to 
+split the graph into CPU and GPU partitionings while trying to optimize CPU-CPU 
+computation overhead, communication overhead and memory savings. 
+
+Generally speaking, offloading is a scale-up approach to utilize as much 
+resources on each machine as possible, including CPU cores and memory. 
+Offloading should reduce GPU memory consuption at the cost of CPU memory and 
+core utilization, while the overall runtime increases.
+
+ZeRO-Offload for Zero Stage 2 is enabled by specifing the offload optimizer 
+configuration inside of the ZeRO configuration:
+
+\begin{json}
+"zero_optimization": {
+    "stage": 2,
+    "offload_optimizer": {
+        "device": "[cpu|nvme]"
+    }
+}
+\end{json}
+
+ZeRO-Infinity \cite*{DBLP:journals/corr/abs-2104-07857} adds further features to 
+ZeRO-Offload by building on top of ZeRO-3 (Stage 3) and also introducing NVMe 
+offloading.
+
+ZeRO-Infinity builds on top of the offload engine of ZeRO-Offload by also 
+mapping the model to a data-flow graph as described above. However, the 
+novel infinity offload engine also allows assigning data-flow partitions 
+to NVMe memory and extends the graph by including activation memory hence 
+also allowing offloading activation checkpoints to CPU memory or NVMe. 
+ZeRO-Infinity also introduces the concept of memory-centric tiling for 
+working memory to split larger layers in the model into smaller tiles, 
+allowing the offload engine to further improve the partitioning scheme and 
+prevent GPU memory overflows with single large layers which often occured 
+before in large language models.   To sum it up, ZeRO-Infinity allows 
+models that are significantly larger than the GPU memory to be trained as 
+long as enough CPU or NVMe is available. 
+
+Similiar to ZeRO-Offload, after our integration of ZeRO-3 into the OCP 
+code base, infinity offloading worked out-of-the-box. ZeRO-Infinity's
+offload engine can be enabled in Stage 3 using the two ZeRO configurations 
+\texttt{offload\_optimizer} and \texttt{offload\_param} to offload 
+either optimizer states or entire parts of the model:
+
+\begin{json}
+"zero_optimization": {
+    "stage": 3,
+    "offload_optimizer": {
+        "device": "[cpu|nvme]"
+    },
+    "offload_param": {
+        "device": "[cpu|nvme]"
+    }
+}
+\end{json}
