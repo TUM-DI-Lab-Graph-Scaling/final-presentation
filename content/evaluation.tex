@@ -1,5 +1,120 @@
 \section{Evaluation}
 
+\begin{frame}{The OC20 dataset\footfullcite{Chanussot_2021}}
+    
+    \begin{columns}
+        \centering
+        \begin{column}{0.52\textwidth}
+            \centering
+            \includegraphics[width=0.85\textwidth]{evaluation/oc20/oc20-summary.pdf}
+            
+            \scriptsize $\sim$ 1.2M relaxations or 264M individual atoms
+        \end{column}
+
+        \begin{column}{0.45\textwidth}
+            \centering
+            \scriptsize Relaxation of molecules on catalyst surfaces
+            \begin{tikzpicture}[scale=0.85, transform shape]
+                \node[anchor=south west,inner sep=0] at (0,0) {\includegraphics[width=\textwidth]{evaluation/oc20/relaxation.pdf}};
+                \draw[->, ultra thick] (0.7,1.5) -- (0.7,1.1);
+                \draw[->, ultra thick] (1.9,1.5) -- (1.9,1.1);
+                \draw[->, ultra thick] (3.15,1.5) -- (3.15,1.1);
+                \draw[->, ultra thick] (4.35,1.5) -- (4.35,1.1);
+                \draw[->, ultra thick] (5.6,1.5) -- (5.6,1.1);
+            \end{tikzpicture}
+
+            \vspace*{0.3cm}
+
+            \begin{tikzpicture}
+                \node[rectangle, draw=tum-orange, fill=tum-light-orange, rounded corners, inner sep=5] (1) at (0,0) {\textcolor{tum-orange}{\textbf{S2EF}}};
+                \node[rectangle, draw=tum-orange, fill=tum-light-orange, rounded corners, inner sep=5] (2) at (2,0) {\textcolor{tum-orange}{\textbf{IS2RE}}};
+                \node[rectangle, draw=tum-gray, rounded corners, inner sep=5] (2) at (4,0) {\textcolor{tum-gray}{\textbf{IS2RS}}};
+                
+                \node[anchor=west] (11) at (-0.5,-0.5) {\tiny \textbf{S}tructure};
+                \node[anchor=west] (11) at (-0.5,-0.8) {\tiny \textbf{to}};
+                \node[anchor=west] (11) at (-0.5,-1.1) {\tiny \textbf{E}nergy and};
+                \node[anchor=west] (11) at (-0.5,-1.4) {\tiny \textbf{F}orces};
+
+                \node[anchor=west] (11) at (1.5,-0.5) {\tiny \textbf{I}nitial};
+                \node[anchor=west] (11) at (1.5,-0.8) {\tiny \textbf{S}tructure};
+                \node[anchor=west] (11) at (1.5,-1.1) {\tiny \textbf{to}};
+                \node[anchor=west] (11) at (1.5,-1.4) {\tiny \textbf{R}elaxed};
+                \node[anchor=west] (11) at (1.5,-1.7) {\tiny \textbf{E}nergy};
+
+                \node[anchor=west] (11) at (3.5,-0.5) {\tiny \textbf{I}nitial};
+                \node[anchor=west] (11) at (3.5,-0.8) {\tiny \textbf{S}tructure};
+                \node[anchor=west] (11) at (3.5,-1.1) {\tiny \textbf{to}};
+                \node[anchor=west] (11) at (3.5,-1.4) {\tiny \textbf{R}elaxed};
+                \node[anchor=west] (11) at (3.5,-1.7) {\tiny \textbf{S}tructure};
+            \end{tikzpicture}
+        \end{column}
+
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Evaluation setup}
+    \begin{small}
+        Computing resources:
+        \vspace*{-0.3cm}
+        \begin{itemize}
+            \bitem Single machine, 2 AMD Epyc 7542 (32 CPU cores each), 528 GB memory \vspace*{-0.25cm}
+            \bitem 8 Nvidia RTX A6000 with 48 GB GDDR6 memory each
+        \end{itemize}
+    \end{small}
+    \vspace*{-0.4cm}
+    \begin{small}
+        \begin{center}
+            \begin{tabular}{|c|c|}
+                \hline
+                \textbf{GemNet-dT} & \textbf{DimeNet++} \\
+                \hline
+                Configuration like GemNet-XL\footnotemark & Configuration like DimeNet++-XL\footnotemark[13] \\
+                292M parameters & 216M parameters \\
+                force-centric, triplets & energy-centric, triplets \\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{small}
+    \vspace*{-0.6cm}
+    \begin{small}
+        \begin{center}
+            \begin{tabular}{|c|c|}
+                \hline
+                \textbf{S2EF} & \textbf{IS2RE} \\
+                \hline
+                \textover[c]{200k (atoms)}{Configuration like GemNet-XL\footnotemark[13]}
+                 & \textover[c]{100k (atoms)}{Configuration like DimeNet++-XL\footnotemark[13]} \\
+                 batch size 16 & batch size 16 \\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{small}
+    \footnotetext{\fullcite{https://doi.org/10.48550/arxiv.2203.09697}}
+\end{frame}
+
+\begin{frame}{Metrics}
+    \begin{small}
+        \begin{itemize}[align=left]
+            \item[\textbf{Time}] Dataloading, forward pass, backward pass, rest (mainly communication) \vspace*{-0.25cm}
+            \item[\textbf{Memory}] Total CPU memory, total GPU memory, PyTorch GPU memory reserved, PyTorch GPU memory allocated
+        \end{itemize}
+    \end{small}
+
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}
+            \node[anchor=south west,inner sep=0] at (0,0) {\includegraphics[width=\textwidth]{evaluation/gpu_usage.png}};
+            \draw[draw=tum-dark-green, thick] (6.15,0.9) -- (6.15,1.65);
+            \draw[draw=tum-green, thick] (6.15,1.65) -- (6.15,2.1);
+            \draw[draw=tum-dark-green, thick] (5.6,0.9) -- (5.6,1.65);
+            \draw[draw=tum-gray, dotted, thick] (1.65,1.65) -- (13.55,1.65);
+            \node[anchor=west] (model) at (6.3,1.3) {\tiny \textcolor{tum-dark-green}{model states}};
+            \node[anchor=west] (data) at (6.3,2.05) {\tiny \textcolor{tum-green}{activations,}};
+            \node[anchor=west] (data) at (6.3,1.85) {\tiny \textcolor{tum-green}{batch}};
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
 \begin{frame}{S2EF task on GemNet}
     
     \begin{figure}[H]

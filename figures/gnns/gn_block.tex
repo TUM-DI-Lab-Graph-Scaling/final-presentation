@@ -1,7 +1,7 @@
 \begin{figure}[H]
     \centering
     \tikzset{
-        n_inactive/.style={draw=tum-gray, fill=white, text=tum-gray, circle},
+        n_inactive/.style={draw=tum-gray, fill=black!2, text=tum-gray, circle},
         n_active/.style={draw=tum-gray, fill=tum-lighter-blue, text=tum-dark-blue, circle},
         n_updated/.style={draw=tum-gray, fill=tum-light-orange, text=tum-orange, circle},
         e_inactive/.style={draw=tum-gray},
@@ -53,7 +53,7 @@
             \draw[] (2,-1.5) -- (2,1.5);
             \node[text=tum-gray] (T) at (1.65,1.2) {\tiny $\uu$};
     
-            \node[n_inactive, inner sep=1, circle split, circle split part fill={white,tum-light-orange}] (A) at (1,0) {\tiny $\vv_i$ \nodepart{lower} \textcolor{tum-orange}{\tiny $\overline{\ee}_i'$}};
+            \node[n_inactive, inner sep=1, circle split, circle split part fill={black!2,tum-light-orange}] (A) at (1,0) {\tiny $\vv_i$ \nodepart{lower} \textcolor{tum-orange}{\tiny $\overline{\ee}_i'$}};
             \node[n_inactive] (B) at (0,0.6) {};
             \node[n_inactive] (C) at (0.3,-0.7) {};
             \node[n_inactive] (D) at (1.4, -1) {};
