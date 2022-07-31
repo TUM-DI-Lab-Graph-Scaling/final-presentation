@@ -2,30 +2,28 @@
 
 \begin{frame}{Conclusion}
     \begin{small}
-        \textbf{What did we do?} \vspace*{-0.3cm}\pause
+        \textbf{What did we do?} \vspace*{-0.3cm} 
         \begin{itemize}
-            \bitem Integrated Microsoft DeepSpeed into OCP project\footnote{\url{https://github.com/TUM-DI-Lab-Graph-Scaling/ocp}} \vspace*{-0.3cm}\pause
-            \bitem Evaluated memory and runtime savings on GemNet-dT (292M params), DimeNet++ (216M params) \vspace*{-0.3cm}\pause
+            \bitem Integrated Microsoft DeepSpeed into OCP project\footnote{\url{https://github.com/TUM-DI-Lab-Graph-Scaling/ocp}} \vspace*{-0.3cm} 
+            \bitem Evaluated memory and runtime savings on GemNet-dT (292M params), DimeNet++ (216M params) \vspace*{-0.3cm} 
         \end{itemize}
         \textbf{Results:} \vspace*{-0.3cm}
         \begin{itemize}
             \bitem GemNet: ZeRO reduces memory footprint significantly: \vspace*{-0.3cm} \\
             \begin{center}
-                -50\% reserved, -75\% allocated (S2EF); -50\% reserved, -87\% allocated (IS2RE) \vspace*{-0.3cm}\pause
+                -50\% reserved, -75\% allocated (S2EF); -50\% reserved, -87\% allocated (IS2RE) \vspace*{-0.3cm} 
             \end{center}
-            \bitem Stage 3, overlapping communication had no effects \vspace*{-0.3cm}\pause
-            \bitem DimeNet++: Large communication overhead\pause
         \end{itemize}
     \end{small}
 \end{frame}
 
 \begin{frame}{Outlook}
     \begin{small}
-        \textbf{What would be interesting to see in the future?}\pause
+        \textbf{What would be interesting to see in the future?} 
         \begin{itemize}
-            \bitem Do our results also prove true for longer training?\pause
-            \bitem Did our optimizations result in decreased model performance?\pause
-            \bitem Can our results be transferred to the new state-of-the-art GemNet-OC\footfullcite{gemnet-oc}?\pause
+            \bitem Do our results also prove true for longer training? 
+            \bitem Did our optimizations result in decreased model performance? 
+            \bitem Can our results be transferred to the new state-of-the-art GemNet-OC\footfullcite{gemnet-oc}? 
             \bitem Can the DeepSpeed optimizations be combined with other parallelization strategies 
             like Graph Parallelism?
         \end{itemize}
