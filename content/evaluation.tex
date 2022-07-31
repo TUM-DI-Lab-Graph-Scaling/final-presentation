@@ -1,5 +1,56 @@
 \section{Evaluation}
 
+\begin{frame}{The OC20 dataset\footfullcite{Chanussot_2021}}
+    
+    \begin{columns}
+        \centering
+        \begin{column}{0.52\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{evaluation/oc20/oc20-summary.pdf}
+        \end{column}
+
+        \begin{column}{0.45\textwidth}
+            \centering
+            \scriptsize Relaxation of molecules on catalyst surfaces
+            \begin{tikzpicture}[scale=0.85, transform shape]
+                \node[anchor=south west,inner sep=0] at (0,0) {\includegraphics[width=\textwidth]{evaluation/oc20/relaxation.pdf}};
+                \draw[->, ultra thick] (0.7,1.5) -- (0.7,1.1);
+                \draw[->, ultra thick] (1.9,1.5) -- (1.9,1.1);
+                \draw[->, ultra thick] (3.15,1.5) -- (3.15,1.1);
+                \draw[->, ultra thick] (4.35,1.5) -- (4.35,1.1);
+                \draw[->, ultra thick] (5.6,1.5) -- (5.6,1.1);
+            \end{tikzpicture}
+
+            \vspace*{0.3cm}
+
+            \begin{tikzpicture}
+                \node[rectangle, draw=tum-orange, fill=tum-light-orange, rounded corners, inner sep=5] (1) at (0,0) {\textcolor{tum-orange}{\textbf{S2EF}}};
+                \node[rectangle, draw=tum-orange, fill=tum-light-orange, rounded corners, inner sep=5] (2) at (2,0) {\textcolor{tum-orange}{\textbf{IS2RE}}};
+                \node[rectangle, draw=tum-gray, rounded corners, inner sep=5] (2) at (4,0) {\textcolor{tum-gray}{\textbf{IS2RS}}};
+                
+                \node[anchor=west] (11) at (-0.5,-0.5) {\tiny \textbf{S}tructure};
+                \node[anchor=west] (11) at (-0.5,-0.8) {\tiny \textbf{to}};
+                \node[anchor=west] (11) at (-0.5,-1.1) {\tiny \textbf{E}nergy and};
+                \node[anchor=west] (11) at (-0.5,-1.4) {\tiny \textbf{F}orces};
+
+                \node[anchor=west] (11) at (1.5,-0.5) {\tiny \textbf{I}nitial};
+                \node[anchor=west] (11) at (1.5,-0.8) {\tiny \textbf{S}tructure};
+                \node[anchor=west] (11) at (1.5,-1.1) {\tiny \textbf{to}};
+                \node[anchor=west] (11) at (1.5,-1.4) {\tiny \textbf{R}elaxed};
+                \node[anchor=west] (11) at (1.5,-1.7) {\tiny \textbf{E}nergy};
+
+                \node[anchor=west] (11) at (3.5,-0.5) {\tiny \textbf{I}nitial};
+                \node[anchor=west] (11) at (3.5,-0.8) {\tiny \textbf{S}tructure};
+                \node[anchor=west] (11) at (3.5,-1.1) {\tiny \textbf{to}};
+                \node[anchor=west] (11) at (3.5,-1.4) {\tiny \textbf{R}elaxed};
+                \node[anchor=west] (11) at (3.5,-1.7) {\tiny \textbf{S}tructure};
+            \end{tikzpicture}
+        \end{column}
+
+    \end{columns}
+
+\end{frame}
+
 \begin{frame}{S2EF task on GemNet}
     
     \begin{figure}[H]
