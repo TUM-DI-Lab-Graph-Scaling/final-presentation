@@ -58,6 +58,7 @@
 
     \begin{columns}
         \begin{column}{0.5\textwidth}
+            \vspace{-0.75cm}
             \begin{center}
                 \begin{small}
                     The engine optimizes tensor
@@ -72,9 +73,16 @@
         
         \end{column}
         \begin{column}{0.5\textwidth}
-            
+            \begin{center}
+                \begin{figure}[H]
+                    \includegraphics[scale=.17]{figures/data_flow_graph.png}
+                    \caption*{\scriptsize Dataflow graph of a neural network. 
+                    Right side: CPU and GPU partitions \footnotemark}
+                \end{figure}
+            \end{center}
         \end{column}
     \end{columns}
+    \footnotetext{\fullcite{DBLP:journals/corr/abs-2101-06840}}
 \end{frame}
 
 \begin{frame}{Deepspeed Configuration}
