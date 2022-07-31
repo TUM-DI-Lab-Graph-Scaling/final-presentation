@@ -40,6 +40,7 @@
 \usepackage{csvsimple}
 \usepackage{multirow}
 \usepackage{pifont}
+\usepackage{calc}
 
 \usetikzlibrary{shapes,snakes}
 \usetikzlibrary{patterns}
@@ -96,6 +97,13 @@
 \newcommand{\bitem}{\item[$\bullet$]}
 
 \renewcommand{\footnotesize}{\tiny}
+
+\newcommand{\textover}[3][l]{%
+ % #1 is the alignment, default l
+ % #2 is the text to be printed
+ % #3 is the text for setting the width
+ \makebox[\widthof{#3}][#1]{#2}%
+ }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Official TUM colors
